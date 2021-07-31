@@ -73,6 +73,14 @@ function class_time_table_insert(){
 		exit;
 	}
 
+	$exits = sql("select * from `class_time_table` where `day`='" . $data['day'] . "' AND venue='" . $data['venue'] . "' AND time_start >= '".$data['time_start']."'   AND  time_end <= '".$data['time_end']."' LIMIT 1", $o);
+
+	if($row = db_fetch_assoc($exits)){
+		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">Lecturer is already assigned at this time <br><br>";
+		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
+		exit;
+	}
+
 	// hook: class_time_table_before_insert
 	if(function_exists('class_time_table_before_insert')){
 		$args=array();
@@ -213,6 +221,16 @@ function class_time_table_update($selected_id){
 	}
 	$data['selectedID']=makeSafe($selected_id);
 
+	//$exits = sql("select * from `class_time_table` where `day`='" . $data['day'] . "' AND venue`='" . $data['venue'] . "' AND time_start >= '".$data['time_start']."' AND  time_end <= '".$data['time_end']."' limit 1", $o);
+
+	$exits = sql("select * from `class_time_table` where `day`='" . $data['day'] . "' AND venue='" . $data['venue'] . "' AND time_start >= '".$data['time_start']."'   AND  time_end <= '".$data['time_end']."' AND id NOT IN (".$data['selectedID'].") LIMIT 1", $o);
+
+	if($row = db_fetch_assoc($exits)){
+		echo StyleSheet() . "\n\n<div class=\"alert alert-danger\">Lecturer is already assigned at this time <br><br>";
+		echo '<a href="" onclick="history.go(-1); return false;">'.$Translation['< back'].'</a></div>';
+		exit;
+	}
+
 	// hook: class_time_table_before_update
 	if(function_exists('class_time_table_before_update')){
 		$args=array();
@@ -226,7 +244,8 @@ function class_time_table_update($selected_id){
 		echo '<a href="class_time_table_view.php?SelectedID='.urlencode($selected_id)."\">{$Translation['< back']}</a>";
 		exit;
 	}
-
+	
+	
 
 	// hook: class_time_table_after_update
 	if(function_exists('class_time_table_after_update')){

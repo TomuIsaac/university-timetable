@@ -64,7 +64,7 @@
 		"`class_time_table`.`time_start`" => " Time Start",
 		"`class_time_table`.`time_end`" => "Time End",
 		"`class_time_table`.`unit_code`" => "Unit code",
-		"`class_time_table`.`venue`" => "Venue",
+		"`class_time_table`.`venue`" => "Lecturer Names",
 		"IF(    CHAR_LENGTH(`Faculties1`.`name`), CONCAT_WS('',   `Faculties1`.`name`), '') /* School */" => "School",
 		"IF(    CHAR_LENGTH(`departments1`.`name`), CONCAT_WS('',   `departments1`.`name`), '') /* Department */" => "Department",
 		"`class_time_table`.`year_of_study`" => "Year of study"
@@ -114,7 +114,7 @@
 	$x->PrimaryKey = "`class_time_table`.`id`";
 
 	$x->ColWidth   = array(  150, 150, 150, 150, 150, 150, 150, 150);
-	$x->ColCaption = array("Day", " Time Start", "Time End", "Unit code", "Venue", "School", "Department", "Year of study");
+	$x->ColCaption = array("Day", " Time Start", "Time End", "Unit code", "Lecturer Names", "School", "Department", "Year of study");
 	$x->ColFieldName = array('day', 'time_start', 'time_end', 'unit_code', 'venue', 'school', 'department', 'year_of_study');
 	$x->ColNumber  = array(2, 3, 4, 5, 6, 7, 8, 9);
 

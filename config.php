@@ -1,7 +1,7 @@
 <?php
 	$dbServer = 'localhost';
 	$dbUsername = 'root';
-	$dbPassword = '';
+	$dbPassword = 'mysql';
 	$dbDatabase = 'TTMS_db';
 
 	$adminConfig = array(
